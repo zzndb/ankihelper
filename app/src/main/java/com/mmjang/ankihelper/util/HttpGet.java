@@ -1,4 +1,4 @@
-package com.mmjang.ankihelper.util.com.baidu.translate.demo;
+package com.mmjang.ankihelper.util;
 
 import java.io.BufferedReader;
 import java.io.Closeable;

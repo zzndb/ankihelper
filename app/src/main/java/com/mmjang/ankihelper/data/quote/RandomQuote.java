@@ -1,9 +1,8 @@
 package com.mmjang.ankihelper.data.quote;
 
 import com.mmjang.ankihelper.MyApplication;
-import com.mmjang.ankihelper.util.com.baidu.translate.demo.HttpGet;
+import com.mmjang.ankihelper.util.HttpGet;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

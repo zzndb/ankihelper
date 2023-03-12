@@ -17,24 +17,24 @@
         android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="APP ID:"
+        android:text="@string/api_key"
         />
     <EditText
         android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edittext_baidufanyi_appid"
+        android:id="@+id/edittext_mstranslate_key"
         />
     <TextView
         android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="密钥:"
+        android:text="@string/api_region"
         />
     <EditText
         android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edittext_baidufanyi_key"
+        android:id="@+id/edittext_mstranslate_region"
         />
 </LinearLayout>

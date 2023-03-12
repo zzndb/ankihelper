@@ -36,8 +36,8 @@ public class Settings {
     private final static String SHOW_CONTENT_ALREADY_READ = "show_content_already_read";
     private final static String FIRST_TIME_RUNNING_READER = "first_time_running_reader";
 
-    private final static String USER_BAIDUFANYI_APP_ID = "user_baidu_fanyi_app_id";
-    private final static String USER_BAIDUFANYI_APP_KEY = "user_baidu_fanyi_app_key";
+    private final static String USER_MSTRANSLATE_KEY = "user_ms_translate_key";
+    private final static String USER_MSTRANSLATE_REGION = "user_ms_translate_region";
 
     private SharedPreferences sp;
     private SharedPreferences.Editor editor;
@@ -221,21 +221,21 @@ public class Settings {
         editor.commit();
     }
 
-    public String getUserBaidufanyiAppId(){
-        return sp.getString(USER_BAIDUFANYI_APP_ID, "");
+    public String getUserMstranslateKey(){
+        return sp.getString(USER_MSTRANSLATE_KEY, "");
     }
 
-    public void setUserBaidufanyiAppId(String userBaidufanyiAppId){
-        editor.putString(USER_BAIDUFANYI_APP_ID, userBaidufanyiAppId);
+    public void setUserMstranslateKey(String userMstranslateKey){
+        editor.putString(USER_MSTRANSLATE_KEY, userMstranslateKey);
         editor.commit();
     }
 
-    public String getUserBaidufanyiAppKey(){
-        return sp.getString(USER_BAIDUFANYI_APP_KEY, "");
+    public String getUserMstranslateRegion(){
+        return sp.getString(USER_MSTRANSLATE_REGION, "");
     }
 
-    public void setUserBaidufanyiAppKey(String userBaidufanyiAppKey){
-        editor.putString(USER_BAIDUFANYI_APP_KEY, userBaidufanyiAppKey);
+    public void setUserMstranslateRegion(String userMstranslateRegion){
+        editor.putString(USER_MSTRANSLATE_REGION, userMstranslateRegion);
         editor.commit();
     }
 

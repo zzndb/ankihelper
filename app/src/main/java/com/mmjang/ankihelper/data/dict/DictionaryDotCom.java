@@ -1,24 +1,17 @@
 package com.mmjang.ankihelper.data.dict;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.ListAdapter;
-import android.widget.Toast;
 
 import com.mmjang.ankihelper.MyApplication;
 import com.mmjang.ankihelper.util.Constant;
-import com.mmjang.ankihelper.util.com.baidu.translate.demo.HttpGet;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.parser.Parser;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

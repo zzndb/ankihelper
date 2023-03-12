@@ -4,43 +4,35 @@ import android.widget.Toast;
 
 import com.mmjang.ankihelper.MyApplication;
 import com.mmjang.ankihelper.data.Settings;
-import com.mmjang.ankihelper.util.com.baidu.translate.demo.RandomAPIKeyGenerator;
-import com.mmjang.ankihelper.util.com.baidu.translate.demo.TransApi;
+import com.mmjang.ankihelper.util.apis.MSTransApi;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 public class Translator {
-    private static final String APP_ID = "20160220000012831";
-    private static final String SECURITY_KEY = "ISSPx0K_ZyrUN9IAOKel";
-    private static TransApi api;
+    private static MSTransApi api;
+
     public static String translate(String query, String from, String to){
-        //remove line break
-        //query = query.replaceAll("\n","");
-        if(api == null) {
+        if (api == null) {
             Settings settings = Settings.getInstance(MyApplication.getContext());
-            if(settings.getUserBaidufanyiAppId().isEmpty()) {
-                String[] appAndKey = RandomAPIKeyGenerator.next();
-                api = new TransApi(appAndKey[0], appAndKey[1]);
-            }else{
-                String id = settings.getUserBaidufanyiAppId();
-                String key = settings.getUserBaidufanyiAppKey();
-                api = new TransApi(id, key);
+            if (!settings.getUserMstranslateKey().isEmpty()) {
+                String apiKey = settings.getUserMstranslateKey();
+                String apiRegion = settings.getUserMstranslateRegion();
+                api = new MSTransApi(apiKey, apiRegion);
+            } else {
+                Toast.makeText(MyApplication.getContext(), "API not found!", Toast.LENGTH_SHORT).show();
+                return null;
             }
         }
         String jsonStr = "";
         try {
-            jsonStr = api.getTransResult(query, from , to);
-            JSONObject json = new JSONObject(jsonStr);
-            JSONArray resultArray = json.getJSONArray("trans_result");
+            jsonStr = api.getTransResult(query, from, to);
+            JSONArray jsonArray = new JSONArray(jsonStr);
+            JSONArray resultArray = jsonArray.getJSONObject(0).getJSONArray("translations");
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < resultArray.length() - 1; i++) {
-                sb.append(resultArray.getJSONObject(i).getString("dst"));
+            for (int i = 0; i < resultArray.length(); i++) {
+                sb.append(resultArray.getJSONObject(i).getString("text"));
                 sb.append("\n");
-            }
-            if (resultArray.length() > 0) {
-                sb.append(resultArray.getJSONObject(resultArray.length() - 1).getString("dst"));
             }
             return sb.toString();
         } catch (JSONException e) {
@@ -49,9 +41,6 @@ public class Translator {
         }
     }
     public static void main(String[] args) {
-//        TransApi api = new TransApi(APP_ID, SECURITY_KEY);
-//        String query = "高度600米";
-//        System.out.println(api.getTransResult(query, "auto", "cn"));
-        System.out.println(Translator.translate("i am a big fat guy", "auto", "zh"));
+        System.out.println(Translator.translate("i am a big fat guy", null, "zh-Hans"));
     }
 }

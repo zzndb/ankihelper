@@ -850,9 +850,9 @@ public class PopupActivity extends Activity implements BigBangLayoutWrapper.Acti
                         try{
                             String result;
                             if(RegexUtil.isChineseSentence(mTextToProcess)){
-                                result = Translator.translate(mTextToProcess, "zh", "en");
+                                result = Translator.translate(mTextToProcess, "zh-Hans", "en");
                             }else {
-                                result = Translator.translate(mTextToProcess, "auto", "zh");
+                                result = Translator.translate(mTextToProcess, null, "zh-Hans");
                             }
                             Message message = mHandler.obtainMessage();
                             message.obj = result;

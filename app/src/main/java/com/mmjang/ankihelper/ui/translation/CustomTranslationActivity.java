@@ -29,13 +29,13 @@ public class CustomTranslationActivity extends AppCompatActivity {
         TextView introduction = findViewById(R.id.textview_custom_translation_introduction);
         introduction.setMovementMethod(LinkMovementMethod.getInstance());
 
-        EditText appid = findViewById(R.id.edittext_baidufanyi_appid);
-        EditText secret = findViewById(R.id.edittext_baidufanyi_key);
+        EditText apiKey = findViewById(R.id.edittext_mstranslate_key);
+        EditText apiRegion = findViewById(R.id.edittext_mstranslate_region);
 
-        appid.setText(settings.getUserBaidufanyiAppId());
-        secret.setText(settings.getUserBaidufanyiAppKey());
+        apiKey.setText(settings.getUserMstranslateKey());
+        apiRegion.setText(settings.getUserMstranslateRegion());
 
-        appid.addTextChangedListener(
+        apiKey.addTextChangedListener(
                 new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -44,7 +44,7 @@ public class CustomTranslationActivity extends AppCompatActivity {
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        settings.setUserBaidufanyiAppId(charSequence.toString().trim());
+                        settings.setUserMstranslateKey(charSequence.toString().trim());
                     }
 
                     @Override
@@ -54,7 +54,7 @@ public class CustomTranslationActivity extends AppCompatActivity {
                 }
         );
 
-        secret.addTextChangedListener(
+        apiRegion.addTextChangedListener(
                 new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -63,7 +63,7 @@ public class CustomTranslationActivity extends AppCompatActivity {
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        settings.setUserBaidufanyiAppKey(charSequence.toString().trim());
+                        settings.setUserMstranslateRegion(charSequence.toString().trim());
                     }
 
                     @Override
