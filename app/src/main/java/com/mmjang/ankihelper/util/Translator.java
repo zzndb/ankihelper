@@ -12,7 +12,7 @@ import org.json.JSONException;
 public class Translator {
     private static MSTransApi api;
 
-    public static String translate(String query, String from, String to){
+    public static String translate(String query, String from, String to) throws Exception {
         if (api == null) {
             Settings settings = Settings.getInstance(MyApplication.getContext());
             if (!settings.getUserMstranslateKey().isEmpty()) {
@@ -20,8 +20,7 @@ public class Translator {
                 String apiRegion = settings.getUserMstranslateRegion();
                 api = new MSTransApi(apiKey, apiRegion);
             } else {
-                Toast.makeText(MyApplication.getContext(), "API not found!", Toast.LENGTH_SHORT).show();
-                return null;
+                throw new Exception("API not found!");
             }
         }
         String jsonStr = "";
@@ -36,11 +35,10 @@ public class Translator {
             }
             return sb.toString();
         } catch (JSONException e) {
-            //Toast.makeText(MyApplication.getContext(), e.getMessage() + jsonStr, Toast.LENGTH_LONG).show();
             return "error\n" + e.getMessage() + "\n" + jsonStr;
         }
     }
     public static void main(String[] args) {
-        System.out.println(Translator.translate("i am a big fat guy", null, "zh-Hans"));
+//        System.out.println(Translator.translate("i am a big fat guy", null, "zh-Hans"));
     }
 }

@@ -2,6 +2,8 @@ package com.mmjang.ankihelper.util.apis;
 
 import com.mmjang.ankihelper.util.HttpPost;
 
+import org.json.JSONException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +19,7 @@ public class MSTransApi {
         this.apiRegion = apiRegion;
     }
 
-    public String getTransResult(String query, String from, String to) {
+    public String getTransResult(String query, String from, String to) throws JSONException {
         Map<String, String> params = buildParams(query, from, to);
         return HttpPost.post(TRANS_API_HOST, params, query, this.apiKey, this.apiRegion);
     }

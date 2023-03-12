@@ -31,7 +31,7 @@ public class HttpPost {
     protected static final int SOCKET_TIMEOUT = 10000; // 10S
     protected static final String POST = "POST";
 
-    public static String post(String host, Map<String, String> params, String query, String apiKey, String apiRegion) {
+    public static String post(String host, Map<String, String> params, String query, String apiKey, String apiRegion) throws JSONException {
         try {
             // 设置SSLContext
             SSLContext sslcontext = SSLContext.getInstance("TLS");
@@ -60,28 +60,29 @@ public class HttpPost {
             os.flush();
             os.close();
 
+            StringBuilder builder = new StringBuilder();
             int statusCode = conn.getResponseCode();
             if (statusCode != HttpURLConnection.HTTP_OK) {
                 System.out.println("Http错误码：" + statusCode);
+                throw new JSONException("HTTP return: " + statusCode);
+            } else {
+                // 读取服务器的数据
+                InputStream is = conn.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                String line = null;
+                while ((line = br.readLine()) != null) {
+                    builder.append(line);
+                }
+
+                String text = builder.toString();
+
+                close(br); // 关闭数据流
+                close(is); // 关闭数据流
+                conn.disconnect(); // 断开连接
             }
 
-            // 读取服务器的数据
-            InputStream is = conn.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            StringBuilder builder = new StringBuilder();
-            String line = null;
-            while ((line = br.readLine()) != null) {
-                builder.append(line);
-            }
-
-            String text = builder.toString();
-
-            close(br); // 关闭数据流
-            close(is); // 关闭数据流
-            conn.disconnect(); // 断开连接
-
-            return text;
-        } catch (IOException | KeyManagementException | NoSuchAlgorithmException | JSONException e) {
+            return builder.toString();
+        } catch (IOException | KeyManagementException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
 
