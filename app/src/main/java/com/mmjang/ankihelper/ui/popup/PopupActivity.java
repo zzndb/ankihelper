@@ -733,11 +733,12 @@ public class PopupActivity extends Activity implements BigBangLayoutWrapper.Acti
                 mTextToProcess = "";
                 isFromAndroidQClipboard = true;
             }
+            mUrl = intent.getStringExtra(Constant.INTENT_ANKIHELPER_TARGET_URL);
             if(base64 != null && !base64.equals("0")){
                 mTextToProcess = new String(Base64.decode(mTextToProcess, Base64.DEFAULT));
+                mUrl = new String(Base64.decode(mUrl, Base64.DEFAULT));
             }
             mTargetWord = intent.getStringExtra(Constant.INTENT_ANKIHELPER_TARGET_WORD);
-            mUrl = intent.getStringExtra(Constant.INTENT_ANKIHELPER_TARGET_URL);
             //mFbReaderBookmarkId = intent.getStringExtra(Constant.INTENT_ANKIHELPER_FBREADER_BOOKMARK_ID);
             String noteEditedByUser = intent.getStringExtra(Constant.INTENT_ANKIHELPER_NOTE);
             if(noteEditedByUser != null){
